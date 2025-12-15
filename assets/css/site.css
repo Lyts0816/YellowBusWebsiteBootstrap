@@ -1,0 +1,71 @@
+/* Brand theme variables */
+:root {
+  /* Brand palette */
+  --brand-primary: #F8F000; /* Yellow */
+  --brand-accent: #28156E;  /* Deep purple */
+
+  /* Component CSS expectations mapped to brand */
+  --primary: var(--brand-accent);         /* Use purple for navbar background */
+  --primary-dark: #1d0f4f;                /* Slightly darker purple */
+  --white: #ffffff;
+  --gray-4: #ced4da;                      /* Bootstrap gray-300-ish */
+  --dark-3: #495057;                      /* Bootstrap gray-700 */
+  --dark: #212529;                         /* Bootstrap body color */
+  --shadow-2: 0 0.5rem 1rem rgba(0,0,0,0.15);
+  --shadow-4: 0 1rem 3rem rgba(0,0,0,0.175);
+}
+
+/* Navbar brand scheme: dark background with accent */
+.bg-brand {
+  background-color: var(--brand-accent) !important;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--brand-primary);
+}
+.navbar-dark .navbar-brand {
+  color: #fff;
+}
+
+/* Larger brand logo size */
+.navbar-brand img { height: 44px; }
+@media (min-width: 992px) { /* lg and up */
+  .navbar-brand img { height: 56px; }
+}
+
+/* Buttons tuned for brand navbar */
+.text-brand { color: var(--brand-accent) !important; }
+.btn-light { border-color: transparent; }
+.btn-outline-light:hover { color: var(--brand-accent); }
+
+/* Sub-menu basic styling (keeps original markup working) */
+.sub-menu { list-style: none; padding-left: 0; }
+.sub-menu .dropdown-item { color: #212529; }
+.sub-menu .dropdown-item:hover { color: var(--brand-accent); }
+
+/* Dropdown menu brand accents */
+.dropdown-menu { border-color: rgba(40, 21, 110, 0.2); }
+.dropdown-item.active, .dropdown-item:active { background-color: var(--brand-primary); color: #000; }
+.navbar .nav-link.active { color: var(--brand-primary) !important; }
+
+/* Ensure component navbar-one background aligns to brand */
+.navbar-one { background: var(--primary); }
+
+/* Caret styling for component sub-nav togglers */
+.navbar-one .sub-nav-toggler span i {
+  color: var(--brand-primary);
+  font-size: 0.95rem;
+  line-height: 1;
+  margin-left: 6px;
+}
+.navbar-one .navbar .navbar-nav .nav-item a:hover .sub-nav-toggler span i {
+  color: var(--brand-primary);
+}
+
+/* Optional: page headings */
+h1, .h1 { color: var(--brand-accent); }
+a { color: var(--brand-accent); }
+a:hover { color: var(--brand-primary); }

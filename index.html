@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Yellow Bus Line</title>
+		<!-- Local Bootstrap CSS -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<!-- Site theme styles -->
+		<link rel="stylesheet" href="assets/css/site.css" />
+		<!-- Component navbar-one styles -->
+		<link rel="stylesheet" href="assets/css/navbar-one.css" />
+	</head>
+	<body>
+		<!--====== NAVBAR ONE PART START ======-->
+		<section class="navbar-area navbar-one">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<nav class="navbar navbar-expand-lg navbar-dark bg-brand sticky-top">
+							<a class="navbar-brand d-flex align-items-center gap-2" href="#">
+								<img src="assets/img/logo3.png" alt="Logo" />
+							</a>
+							<button
+								class="navbar-toggler"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#navbarOne"
+								aria-controls="navbarOne"
+								aria-expanded="false"
+								aria-label="Toggle navigation"
+							>
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse sub-menu-bar" id="navbarOne">
+								<ul class="navbar-nav m-auto">
+							<li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="pages/buses.html">Buses</a></li>
+							<li class="nav-item"><a class="nav-link" href="pages/tripsched.html">Trip Schedule</a></li>
+							<li class="nav-item"><a class="nav-link" href="pages/awards.html">Awards</a></li>
+								</ul>
+							</div>
+						</nav>
+						<!-- navbar -->
+					</div>
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</section>
+		<!--====== NAVBAR ONE PART ENDS ======-->
+
+		<!-- Dynamic content area -->
+		<main class="container py-5">
+			<!-- Home Section -->
+			<section id="home-content" class="page-content active">
+				<div class="row">
+					<div class="col-lg-8">
+						<h1 class="display-4 mb-4" style="color: var(--brand-accent); font-family: 'Myriad Pro', sans-serif;">Welcome to Yellow Bus Line</h1>
+						<p class="lead">Your trusted partner for safe, reliable, and comfortable transportation services.</p>
+						<p>Since 1998, we've been committed to providing exceptional transit experiences across our service areas. With a modern fleet and professional staff, we ensure every journey is smooth and on time.</p>
+						<div class="mt-4">
+						<a href="pages/buses.html" class="btn btn-lg me-2" style="background: var(--brand-accent); color: white;">View Our Fleet</a>
+						<a href="pages/tripsched.html" class="btn btn-lg btn-outline-secondary">Check Schedule</a>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="p-4 rounded" style="background: rgba(248,240,0,0.15); border: 2px solid var(--brand-primary);">
+							<h3 class="h5 mb-3" style="color: var(--brand-accent);">Why Choose Us?</h3>
+							<ul class="list-unstyled">
+								<li class="mb-2">✓ 50+ Modern Buses</li>
+								<li class="mb-2">✓ Professional Drivers</li>
+								<li class="mb-2">✓ On-Time Service</li>
+								<li class="mb-2">✓ Safety First</li>
+								<li class="mb-2">✓ Competitive Rates</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Local Bootstrap JS (bundle includes Popper) -->
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script>
+			// Toggle button active state (visual)
+			const navbarTogglerOne = document.querySelector('.navbar-one .navbar-toggler');
+			if (navbarTogglerOne) {
+				navbarTogglerOne.addEventListener('click', function () {
+					navbarTogglerOne.classList.toggle('active');
+				});
+			}
+
+// Single-page app content switching
+		(function () {
+			const contentSections = document.querySelectorAll('.page-content');
+			const navLinks = document.querySelectorAll('[data-page]');
+
+			function showPage(pageId) {
+				// Hide all sections
+				contentSections.forEach(section => section.classList.remove('active'));
+				// Remove active from all nav links
+				navLinks.forEach(link => link.classList.remove('active'));
+
+				// Show selected section
+				const targetSection = document.getElementById(pageId + '-content');
+				if (targetSection) {
+					targetSection.classList.add('active');
+					// Scroll to top of content
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+				}
+
+				// Set active nav link
+				const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+				if (activeLink) {
+					activeLink.classList.add('active');
+				}
+			}
+
+			// Add click handlers to all nav links with data-page
+			navLinks.forEach(link => {
+				link.addEventListener('click', function(e) {
+					e.preventDefault();
+					const pageId = this.getAttribute('data-page');
+					showPage(pageId);
+
+					// Close mobile menu if open
+					const navCollapse = document.getElementById('navbarOne');
+					if (navCollapse.classList.contains('show')) {
+						const bsCollapse = new bootstrap.Collapse(navCollapse);
+						bsCollapse.hide();
+					}
+				});
+			});
+
+			// Show home page by default
+			showPage('home');
+			})();
+		</script>
+	</body>
+</html>
