@@ -5,7 +5,7 @@
   --brand-accent: #28156E;  /* Deep purple */
 
   /* Component CSS expectations mapped to brand */
-  --primary: var(--brand-accent);         /* Use purple for navbar background */
+  --primary: var(--brand-accent);         /* Use purple for navbar background, BG COLOR*/
   --primary-dark: #1d0f4f;                /* Slightly darker purple */
   --white: #ffffff;
   --gray-4: #ced4da;                      /* Bootstrap gray-300-ish */
@@ -17,7 +17,7 @@
 
 /* Navbar brand scheme: dark background with accent */
 .bg-brand {
-  background-color: var(--brand-accent) !important;
+  background-color: var(--brand-accent) !important; /* ANOTHER NAVBAR BG COLOR */
 }
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.85);

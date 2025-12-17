@@ -2,7 +2,7 @@
   card-01 css
 ===========================*/
 .card-area {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .single-card {
@@ -10,8 +10,9 @@
   border-radius: 8px;
   overflow: hidden;
   margin-top: 30px;
-  margin-bottom: 30px;
-  height: 100%;
+  margin-bottom: 50px;
+ 
+  height: 95%;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
@@ -36,7 +37,7 @@
 }
 
 .single-card .card-content {
-  padding: 24px;
+  padding: 50px;
 }
 
 .single-card .card-content .card-title {
