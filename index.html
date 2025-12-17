@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="assets/css/site.css" />
 		<!-- Component navbar-one styles -->
 		<link rel="stylesheet" href="assets/css/navbar-one.css" />
+		<!-- Component card-one styles -->
+		<link rel="stylesheet" href="assets/css/card-one.css" />
 	</head>
 	<body>
 		<!--====== NAVBAR ONE PART START ======-->
@@ -36,10 +38,10 @@
 							</button>
 							<div class="collapse navbar-collapse sub-menu-bar" id="navbarOne">
 								<ul class="navbar-nav m-auto">
-							<li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="pages/buses.html">Buses</a></li>
-							<li class="nav-item"><a class="nav-link" href="pages/tripsched.html">Trip Schedule</a></li>
-							<li class="nav-item"><a class="nav-link" href="pages/awards.html">Awards</a></li>
+							<li class="nav-item"><a class="nav-link active" href="#" data-page="home">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="#" data-page="buses">Buses</a></li>
+							<li class="nav-item"><a class="nav-link" href="#" data-page="tripsched">Trip Schedule</a></li>
+							<li class="nav-item"><a class="nav-link" href="#" data-page="awards">Awards</a></li>
 								</ul>
 							</div>
 						</nav>
@@ -53,7 +55,7 @@
 		<!--====== NAVBAR ONE PART ENDS ======-->
 
 		<!-- Dynamic content area -->
-		<main class="container py-5">
+		<main class="container py-5" id="content-area">
 			<!-- Home Section -->
 			<section id="home-content" class="page-content active">
 				<div class="row">
@@ -62,8 +64,8 @@
 						<p class="lead">Your trusted partner for safe, reliable, and comfortable transportation services.</p>
 						<p>Since 1998, we've been committed to providing exceptional transit experiences across our service areas. With a modern fleet and professional staff, we ensure every journey is smooth and on time.</p>
 						<div class="mt-4">
-						<a href="pages/buses.html" class="btn btn-lg me-2" style="background: var(--brand-accent); color: white;">View Our Fleet</a>
-						<a href="pages/tripsched.html" class="btn btn-lg btn-outline-secondary">Check Schedule</a>
+						<a href="#" class="btn btn-lg me-2" data-page="buses" style="background: var(--brand-accent); color: white;">View Our Fleet</a>
+						<a href="#" class="btn btn-lg btn-outline-secondary" data-page="tripsched">Check Schedule</a>
 						</div>
 					</div>
 					<div class="col-lg-4">
@@ -80,6 +82,9 @@
 					</div>
 				</div>
 			</section>
+
+			<!-- Content loaded from external pages will be inserted here -->
+			<section id="dynamic-content" class="page-content"></section>
 		</main>
 
 		<!-- Local Bootstrap JS (bundle includes Popper) -->
@@ -95,43 +100,97 @@
 
 // Single-page app content switching
 		(function () {
-			const contentSections = document.querySelectorAll('.page-content');
+			const pageFiles = {
+				'buses': 'pages/buses.html',
+				'tripsched': 'pages/tripsched.html',
+				'awards': 'pages/awards.html'
+			};
+
 			const navLinks = document.querySelectorAll('[data-page]');
+			const contentArea = document.getElementById('dynamic-content');
+			const homeContent = document.getElementById('home-content');
+
+			async function loadPageContent(pageId) {
+				const filePath = pageFiles[pageId];
+				
+				if (!filePath) return;
+
+				try {
+					// Reset animation by removing active before swap
+					contentArea.classList.remove('active');
+					const response = await fetch(filePath);
+					const html = await response.text();
+					
+					// Parse the HTML and extract the main content
+					const parser = new DOMParser();
+					const doc = parser.parseFromString(html, 'text/html');
+					
+					// Try to get main first, then fall back to body content
+					let mainContent = doc.querySelector('main');
+					if (!mainContent) {
+						// For pages without main, get all content between navbar and scripts
+						const body = doc.querySelector('body');
+						const navbar = body.querySelector('.navbar-area');
+						const scripts = body.querySelectorAll('script');
+						
+						// Create a container and add all content except navbar
+						const tempDiv = document.createElement('div');
+						Array.from(body.children).forEach(child => {
+							if (child !== navbar && !child.matches('script')) {
+								tempDiv.appendChild(child.cloneNode(true));
+							}
+						});
+						contentArea.innerHTML = tempDiv.innerHTML;
+					} else {
+						contentArea.innerHTML = mainContent.innerHTML;
+					}
+
+					// Force reflow then re-apply active to trigger animation each load
+					void contentArea.offsetWidth;
+					contentArea.classList.add('active');
+				} catch (error) {
+					console.error('Error loading page:', error);
+				}
+			}
 
 			function showPage(pageId) {
-				// Hide all sections
-				contentSections.forEach(section => section.classList.remove('active'));
+				// Hide/show home content
+				if (pageId === 'home') {
+					homeContent.classList.add('active');
+					contentArea.classList.remove('active');
+					contentArea.innerHTML = '';
+				} else {
+					homeContent.classList.remove('active');
+					contentArea.classList.add('active');
+					loadPageContent(pageId);
+				}
+
 				// Remove active from all nav links
 				navLinks.forEach(link => link.classList.remove('active'));
-
-				// Show selected section
-				const targetSection = document.getElementById(pageId + '-content');
-				if (targetSection) {
-					targetSection.classList.add('active');
-					// Scroll to top of content
-					window.scrollTo({ top: 0, behavior: 'smooth' });
-				}
 
 				// Set active nav link
 				const activeLink = document.querySelector(`[data-page="${pageId}"]`);
 				if (activeLink) {
 					activeLink.classList.add('active');
 				}
+
+				// Scroll to top of content
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+
+				// Close mobile menu if open
+				const navCollapse = document.getElementById('navbarOne');
+				if (navCollapse && navCollapse.classList.contains('show')) {
+					const bsCollapse = new bootstrap.Collapse(navCollapse);
+					bsCollapse.hide();
+				}
 			}
 
-			// Add click handlers to all nav links with data-page
+			// Add click handlers to all nav links and buttons with data-page
 			navLinks.forEach(link => {
 				link.addEventListener('click', function(e) {
 					e.preventDefault();
 					const pageId = this.getAttribute('data-page');
 					showPage(pageId);
-
-					// Close mobile menu if open
-					const navCollapse = document.getElementById('navbarOne');
-					if (navCollapse.classList.contains('show')) {
-						const bsCollapse = new bootstrap.Collapse(navCollapse);
-						bsCollapse.hide();
-					}
 				});
 			});
 

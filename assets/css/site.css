@@ -69,3 +69,35 @@
 h1, .h1 { color: var(--brand-accent); }
 a { color: var(--brand-accent); }
 a:hover { color: var(--brand-primary); }
+
+/* Page content animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.page-content {
+  display: none;
+}
+
+.page-content.active {
+  display: block;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
