@@ -7,6 +7,7 @@
 
 .single-card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #28156E;
   border-radius: 8px;
   overflow: hidden;
   margin-top: 0px;
@@ -20,7 +21,7 @@
 }
 
 .single-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px #28156E;
   transform: translateY(-5px);
 }
 
@@ -42,10 +43,11 @@
 .single-card .card-content .card-title {
   margin-bottom: 12px;
   font-size: 1.25rem;
+
 }
 
 .single-card .card-content .card-title a {
-  color: #333;
+  color: #F8F000;
   text-decoration: none;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
@@ -55,11 +57,11 @@
 }
 
 .single-card .card-content .card-title a:hover {
-  color: var(--brand-accent);
+  color: #F8F000;
 }
 
 .single-card .card-content .text {
-  color: #666;
+  color: #ffffff;
   margin-top: 8px;
   line-height: 1.6;
 }
