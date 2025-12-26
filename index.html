@@ -155,19 +155,20 @@
             const response = await fetch(filePath);
             const html = await response.text();
 
-            // Parse the HTML and extract the main content
+            // Parse the HTML and extract content
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, "text/html");
 
-            // Try to get main first, then fall back to body content
-            let mainContent = doc.querySelector("main");
-            if (!mainContent) {
+            // Support pages with multiple <main> sections (concatenate their contents)
+            const mains = doc.querySelectorAll("main");
+            if (mains && mains.length > 0) {
+              contentArea.innerHTML = Array.from(mains)
+                .map((m) => m.innerHTML)
+                .join("");
+            } else {
               // For pages without main, get all content between navbar and scripts
               const body = doc.querySelector("body");
               const navbar = body.querySelector(".navbar-area");
-              const scripts = body.querySelectorAll("script");
-
-              // Create a container and add all content except navbar
               const tempDiv = document.createElement("div");
               Array.from(body.children).forEach((child) => {
                 if (child !== navbar && !child.matches("script")) {
@@ -175,8 +176,11 @@
                 }
               });
               contentArea.innerHTML = tempDiv.innerHTML;
-            } else {
-              contentArea.innerHTML = mainContent.innerHTML;
+            }
+
+            // Initialize page-specific interactions after content injection
+            if (pageId === "tripsched") {
+              initTripScheduleInteractions();
             }
 
             // Force reflow then re-apply active to trigger animation each load
@@ -185,6 +189,23 @@
           } catch (error) {
             console.error("Error loading page:", error);
           }
+        }
+
+        function initTripScheduleInteractions() {
+          const select = document.querySelector("#dynamic-content #scheduleSelect");
+          if (!select) return;
+
+          select.addEventListener("change", function () {
+            const anchor = this.value;
+            if (!anchor) return;
+            const element = document.querySelector(`#dynamic-content ${anchor}`);
+            if (!element) return;
+
+            const offset = 80; // adjust if your navbar height differs
+            const target = element.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: target, behavior: "smooth" });
+            history.replaceState(null, "", anchor);
+          });
         }
 
         function showPage(pageId) {

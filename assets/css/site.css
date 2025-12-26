@@ -101,3 +101,23 @@ a:hover { color: var(--brand-primary); }
   display: block;
   animation: fadeInUp 0.5s ease-out forwards;
 }
+
+/* Sticky schedule dropdown: stays visible while scrolling */
+.schedule-sticky {
+  position: sticky;
+  top: 80px; /* keep just below the navbar */
+  z-index: 1020; /* above content, below modal (Bootstrap modal is 1055) */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Make label/select sit nicely on one line on wide screens */
+@media (min-width: 576px) {
+  .schedule-sticky { display: inline-flex; align-items: center; gap: 10px; }
+  .schedule-sticky .form-label { margin-bottom: 0; }
+  .schedule-sticky .form-select { min-width: 280px; }
+}
