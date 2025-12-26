@@ -132,6 +132,44 @@
     <!-- Local Bootstrap JS (bundle includes Popper) -->
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script>
+      // Smooth scroll easing for all manual scrolling (wheel, trackpad, etc.)
+      let targetScroll = window.scrollY;
+      let isAnimating = false;
+      let scrollTimeout;
+
+      function smoothScrollTo(target) {
+        targetScroll = Math.max(0, Math.min(target, document.documentElement.scrollHeight - window.innerHeight));
+        
+        if (!isAnimating) {
+          isAnimating = true;
+          animateScroll();
+        }
+      }
+
+      function animateScroll() {
+        const currentScroll = window.scrollY;
+        const diff = targetScroll - currentScroll;
+
+        if (Math.abs(diff) > 0.1) {
+          window.scrollBy(0, diff * 0.1);
+          requestAnimationFrame(animateScroll);
+        } else {
+          window.scrollTo(0, targetScroll);
+          isAnimating = false;
+        }
+      }
+
+      window.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        const scrollDelta = e.deltaY > 0 ? 60 : -60;
+        smoothScrollTo(targetScroll + scrollDelta);
+      }, { passive: false });
+
+      window.addEventListener('touchmove', function (e) {
+        // Prevent default but allow smooth scroll
+      }, { passive: false });
+    </script>
+    <script>
       // Single-page app content switching
       (function () {
         const pageFiles = {
@@ -181,6 +219,9 @@
             // Initialize page-specific interactions after content injection
             if (pageId === "tripsched") {
               initTripScheduleInteractions();
+              // Apply entrance animation to dynamically loaded content
+              const contentArea = document.getElementById("dynamic-content");
+              contentArea.classList.add("tripsched-enter");
             }
 
             // Force reflow then re-apply active to trigger animation each load
@@ -189,6 +230,26 @@
           } catch (error) {
             console.error("Error loading page:", error);
           }
+        }
+
+        // Smooth scroll helper using requestAnimationFrame
+        function smoothScrollToElement(element, offset, duration) {
+          if (!element) return;
+          const startPosition = window.pageYOffset;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+          const distance = elementPosition - startPosition;
+          const steps = Math.ceil(duration / 16);
+          const stepSize = distance / steps;
+          let currentStep = 0;
+
+          function scroll() {
+            currentStep++;
+            window.scrollBy(0, stepSize);
+            if (currentStep < steps) {
+              requestAnimationFrame(scroll);
+            }
+          }
+          requestAnimationFrame(scroll);
         }
 
         function initTripScheduleInteractions() {
@@ -201,9 +262,9 @@
             const element = document.querySelector(`#dynamic-content ${anchor}`);
             if (!element) return;
 
-            const offset = 80; // adjust if your navbar height differs
+            const offset = 80;
             const target = element.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top: target, behavior: "smooth" });
+            smoothScrollTo(target);
             element.classList.add("scroll-highlight");
             setTimeout(() => element.classList.remove("scroll-highlight"), 900);
             history.replaceState(null, "", anchor);
@@ -231,8 +292,8 @@
             activeLink.classList.add("active");
           }
 
-          // Scroll to top of content
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          // Scroll to top of content with easing
+          smoothScrollTo(0);
 
           // Close mobile menu if open
           const navCollapse = document.getElementById("navbarOne");

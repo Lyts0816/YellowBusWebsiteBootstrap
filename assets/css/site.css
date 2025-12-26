@@ -15,9 +15,28 @@
   --shadow-4: 0 1rem 3rem rgba(0,0,0,0.175);
 }
 
+/* Enable smooth scrolling on entire page */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Navbar brand scheme: dark background with accent */
 .bg-brand {
   background-color: var(--brand-accent) !important; /* ANOTHER NAVBAR BG COLOR */
+}
+
+/* Ensure navbar-one stays visible at top during scrolling */
+.navbar-area {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  width: 100%;
+}
+
+.navbar.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
 }
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.85);
@@ -123,7 +142,7 @@ a:hover { color: var(--brand-primary); }
 
 @keyframes highlightPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(248, 240, 0, 0.45);
+    box-shadow: 0 0 0 0 rgba(89, 0, 255, 0.45);
     background-color: rgba(248, 240, 0, 0.12);
   }
   60% {
@@ -133,6 +152,22 @@ a:hover { color: var(--brand-primary); }
   100% {
     box-shadow: 0 0 0 0 rgba(248, 240, 0, 0);
     background-color: transparent;
+  }
+}
+
+/* Entrance animation for tripsched page */
+.tripsched-enter {
+  animation: tripschedSlideUp 0.6s ease-out forwards;
+}
+
+@keyframes tripschedSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
