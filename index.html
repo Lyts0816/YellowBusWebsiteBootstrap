@@ -204,6 +204,8 @@
             const offset = 80; // adjust if your navbar height differs
             const target = element.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({ top: target, behavior: "smooth" });
+            element.classList.add("scroll-highlight");
+            setTimeout(() => element.classList.remove("scroll-highlight"), 900);
             history.replaceState(null, "", anchor);
           });
         }

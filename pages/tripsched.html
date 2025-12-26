@@ -17,10 +17,56 @@
         <label for="scheduleSelect" class="form-label fw-semibold">Go to schedule</label>
         <select id="scheduleSelect" class="form-select" aria-label="Select trip schedule">
           <option value="" selected>Select a route…</option>
+          <option value="#images-grid-1">Images (grid 1)</option>
+          <option value="#images-grid-2">Images (grid 2)</option>
+          <option value="#images-table">Images (table)</option>
           <option value="#gensan-section">Marbel → General Santos</option>
           <option value="#polomolok-section">Marbel → Polomolok</option>
         </select>
       </div>
+        <!-- 1 Side-by-side image examples -->
+        <section class="mb-5" id="images-grid-1">
+          <div class="row g-3 align-items-center">
+            <div class="col-md-6 text-center">
+              <img src="../assets/img/scheduleimg/DAVAO1.jpg" class="img-fluid img-modern" alt="Sample image 1" />
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 2" />
+            </div>
+          </div>
+        </section>
+
+        <!-- 1 Side-by-side image examples -->
+        <section class="mb-5" id="images-grid-2">
+          <div class="row g-3 align-items-center">
+            <div class="col-md-6 text-center">
+              <img src="../assets/img/scheduleimg/DAVAO1.jpg" class="img-fluid img-modern" alt="Sample image 1" />
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 2" />
+            </div>
+          </div>
+        </section>
+
+        <!-- 2 Side-by-side images using table layout -->
+        <section class="mb-5" id="images-table">
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <tbody>
+                <tr>
+                  <td class="text-center" style="width: 50%;">
+                    <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 1" />
+                  </td>
+                  <td class="text-center" style="width: 50%;">
+                    <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 2" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
       <h1 class="h3 mb-4 text-decoration-underline" id="gensan-section">MARBEL TO GENSAN</h1>
       <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -153,6 +199,8 @@
           var offset = 80;
           var target = element.getBoundingClientRect().top + window.pageYOffset - offset;
           window.scrollTo({ top: target, behavior: 'smooth' });
+          element.classList.add('scroll-highlight');
+          setTimeout(function () { element.classList.remove('scroll-highlight'); }, 900);
           // Update hash for deep-linking and accessibility
           history.replaceState(null, '', anchor);
         });
