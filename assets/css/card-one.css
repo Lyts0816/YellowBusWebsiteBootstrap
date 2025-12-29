@@ -1,16 +1,15 @@
 /*===========================
   card-01 css
 ===========================*/
-.card-area {
+/* .card-area {
   padding-top: 0px;
-}
+} */
 
 .single-card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: #28156E;
   border-radius: 8px;
   overflow: hidden;
-  margin-top: 0px;
   margin-bottom: 50px;
   height: 88%;
   -webkit-transition: all 0.3s ease-out 0s;
@@ -37,11 +36,11 @@
 }
 
 .single-card .card-content {
-  padding: 50px;
+  padding: 35px;
 }
 
 .single-card .card-content .card-title {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-size: 1.25rem;
 
 }
