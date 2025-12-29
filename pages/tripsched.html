@@ -8,64 +8,114 @@
     <link rel="stylesheet" href="../assets/css/site.css" />
     <link rel="stylesheet" href="../assets/css/navbar-one.css" />
   </head>
+
   <body>
-    
     <!-- FIRST TABLE OF SCHEDULE -->
     <main class="container py-5 tripsched-enter">
       <h1 class="h3 mb-4 fw-bold">TRIP SCHEDULE</h1>
+
+      <div
+        class="alert schedule-alert d-flex align-items-start gap-3"
+        role="alert"
+      >
+        <div class="alert-icon flex-shrink-0" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M10.29 3.86c.77-1.33 2.65-1.33 3.42 0l8.28 14.23c.75 1.29-.17 2.91-1.71 2.91H3.72c-1.54 0-2.46-1.62-1.71-2.91L10.29 3.86ZM12 9c-.55 0-1 .45-1 1v3.5c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5V10c0-.55-.45-1-1-1Zm0 7c-.69 0-1.25.56-1.25 1.25S11.31 18.5 12 18.5s1.25-.56 1.25-1.25S12.69 16 12 16Z"
+            />
+          </svg>
+        </div>
+        <div>
+          <div class="fw-semibold text-dark">SCHEDULE MAY CHANGE</div>
+          <p class="mb-0 small text-muted">
+            Trips can shift due to traffic, weather, or maintenance. Please
+            re-check close to your departure time.
+          </p>
+        </div>
+      </div>
+
       <div class="mb-4 schedule-sticky">
-        <label for="scheduleSelect" class="form-label fw-semibold">Go to schedule</label>
-        <select id="scheduleSelect" class="form-select" aria-label="Select trip schedule">
+        <label for="scheduleSelect" class="form-label fw-semibold"
+          >SELECT SCHEDULE</label
+        >
+        <select
+          id="scheduleSelect"
+          class="form-select"
+          aria-label="Select trip schedule"
+        >
           <option value="" selected>Select a route…</option>
-          <option value="#images-grid-1">Images (grid 1)</option>
-          <option value="#images-grid-2">Images (grid 2)</option>
-          <option value="#images-table">Images (table)</option>
-          <option value="#gensan-section">Marbel → General Santos</option>
-          <option value="#polomolok-section">Marbel → Polomolok</option>
+          <option value="#images-grid-1">Sched 1</option>
+          <option value="#images-grid-2">Sched 2</option>
+          <option value="#images-table">Sched 3</option>
         </select>
       </div>
-        <!-- 1 Side-by-side image examples -->
-        <section class="mb-5" id="images-grid-1">
-          <div class="row g-3 align-items-center">
-            <div class="col-md-6 text-center">
-              <img src="../assets/img/scheduleimg/DAVAO1.jpg" class="img-fluid img-modern" alt="Sample image 1" />
-            </div>
-            <div class="col-md-6 text-center">
-              <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 2" />
-            </div>
-          </div>
-        </section>
 
-        <!-- 1 Side-by-side image examples -->
-        <section class="mb-5" id="images-grid-2">
-          <div class="row g-3 align-items-center">
-            <div class="col-md-6 text-center">
-              <img src="../assets/img/scheduleimg/DAVAO1.jpg" class="img-fluid img-modern" alt="Sample image 1" />
-            </div>
-            <div class="col-md-6 text-center">
-              <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 2" />
-            </div>
+      <!-- 1 Side-by-side image examples -->
+      <section class="mb-5" id="images-grid-1">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6 text-center">
+            <img
+              src="../assets/img/scheduleimg/DAVAO1.jpg"
+              class="img-fluid img-modern"
+              alt="Sample image 1"
+            />
           </div>
-        </section>
+          <div class="col-md-6 text-center">
+            <img
+              src="../assets/img/scheduleimg/digos1.jpg"
+              class="img-fluid img-modern"
+              alt="Sample image 2"
+            />
+          </div>
+        </div>
+      </section>
 
-        <!-- 2 Side-by-side images using table layout -->
-        <section class="mb-5" id="images-table">
-          <div class="table-responsive">
-            <table class="table align-middle mb-0">
-              <tbody>
-                <tr>
-                  <td class="text-center" style="width: 50%;">
-                    <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 1" />
-                  </td>
-                  <td class="text-center" style="width: 50%;">
-                    <img src="../assets/img/scheduleimg/digos1.jpg" class="img-fluid img-modern" alt="Sample image 2" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      <!-- 1 Side-by-side image examples -->
+      <section class="mb-5" id="images-grid-2">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6 text-center">
+            <img
+              src="../assets/img/scheduleimg/DAVAO1.jpg"
+              class="img-fluid img-modern"
+              alt="Sample image 1"
+            />
           </div>
-        </section>
-      
+          <div class="col-md-6 text-center">
+            <img
+              src="../assets/img/scheduleimg/digos1.jpg"
+              class="img-fluid img-modern"
+              alt="Sample image 2"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 Side-by-side images using table layout -->
+      <section class="mb-5" id="images-table">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <tbody>
+              <tr>
+                <td class="text-center" style="width: 50%">
+                  <img
+                    src="../assets/img/scheduleimg/digos1.jpg"
+                    class="img-fluid img-modern"
+                    alt="Sample image 1"
+                  />
+                </td>
+                <td class="text-center" style="width: 50%">
+                  <img
+                    src="../assets/img/scheduleimg/digos1.jpg"
+                    class="img-fluid img-modern"
+                    alt="Sample image 2"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
@@ -74,7 +124,8 @@
       function smoothScrollToElement(element, offset, duration) {
         if (!element) return;
         var startPosition = window.pageYOffset;
-        var elementPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+        var elementPosition =
+          element.getBoundingClientRect().top + window.pageYOffset - offset;
         var distance = elementPosition - startPosition;
         var steps = Math.ceil(duration / 16);
         var stepSize = distance / steps;
@@ -91,27 +142,31 @@
       }
 
       // Scroll to selected schedule section with offset for fixed header
-      document.addEventListener('DOMContentLoaded', function () {
-        var select = document.getElementById('scheduleSelect');
+      document.addEventListener("DOMContentLoaded", function () {
+        var select = document.getElementById("scheduleSelect");
         if (!select) return;
-        select.addEventListener('change', function () {
+        select.addEventListener("change", function () {
           var anchor = this.value;
           if (!anchor) return;
           var element = document.querySelector(anchor);
           if (!element) return;
           var offset = 80;
           smoothScrollToElement(element, offset, 600);
-          element.classList.add('scroll-highlight');
-          setTimeout(function () { element.classList.remove('scroll-highlight'); }, 900);
-          history.replaceState(null, '', anchor);
+          element.classList.add("scroll-highlight");
+          setTimeout(function () {
+            element.classList.remove("scroll-highlight");
+          }, 900);
+          history.replaceState(null, "", anchor);
         });
       });
     </script>
     <script>
-      const navbarTogglerOne = document.querySelector('.navbar-one .navbar-toggler');
+      const navbarTogglerOne = document.querySelector(
+        ".navbar-one .navbar-toggler"
+      );
       if (navbarTogglerOne) {
-        navbarTogglerOne.addEventListener('click', function () {
-          navbarTogglerOne.classList.toggle('active');
+        navbarTogglerOne.addEventListener("click", function () {
+          navbarTogglerOne.classList.toggle("active");
         });
       }
     </script>
